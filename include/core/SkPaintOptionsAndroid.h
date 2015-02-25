@@ -28,6 +28,8 @@
 
 class SkFlattenableReadBuffer;
 class SkFlattenableWriteBuffer;
+class SkReadBuffer;
+class SkWriteBuffer;
 
 /** \class SkLanguage
 
@@ -138,8 +140,8 @@ public:
                fUseFontFallbacks != b.fUseFontFallbacks;
     }
 
-    void flatten(SkFlattenableWriteBuffer&) const;
-    void unflatten(SkFlattenableReadBuffer&);
+    void flatten(SkWriteBuffer&) const;
+    void unflatten(SkReadBuffer&);
 
     /** Return the paint's language value used for drawing text.
         @return the paint's language value used for drawing text.

@@ -7,7 +7,8 @@
  */
 
 #include "SkPaintOptionsAndroid.h"
-#include "SkFlattenableBuffers.h"
+#include "SkReadBuffer.h"
+#include "SkWriteBuffer.h"
 #include "SkTDict.h"
 #include "SkThread.h"
 #include <cstring>
@@ -176,7 +177,7 @@ SkLanguage SkLanguage::getParent() const {
     return SkLanguage(tag, parentTagLen);
 }
 
-void SkPaintOptionsAndroid::flatten(SkFlattenableWriteBuffer& buffer) const {
+void SkPaintOptionsAndroid::flatten(SkWriteBuffer& buffer) const {
     buffer.writeUInt(fFontVariant);
 #ifdef SKLANG_OPT
     buffer.writeString(getLanguage().getTag().c_str());
@@ -186,7 +187,7 @@ void SkPaintOptionsAndroid::flatten(SkFlattenableWriteBuffer& buffer) const {
     buffer.writeBool(fUseFontFallbacks);
 }
 
-void SkPaintOptionsAndroid::unflatten(SkFlattenableReadBuffer& buffer) {
+void SkPaintOptionsAndroid::unflatten(SkReadBuffer& buffer) {
     fFontVariant = (FontVariant)buffer.readUInt();
     SkString tag;
     buffer.readString(&tag);
